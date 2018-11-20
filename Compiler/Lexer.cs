@@ -1,4 +1,5 @@
-﻿
+﻿using System;
+
 namespace Compiler
 {
     public class Lexer
@@ -18,7 +19,37 @@ namespace Compiler
                 return new Token(Token.EOF);
             }
 
-            return new Token(expression.Substring(currentPosition++, 1));
+            string lexema = "";
+
+            while (expression.Length > currentPosition)
+            {
+                var sumbol = expression.Substring(currentPosition, 1);
+
+                if (string.IsNullOrEmpty(sumbol.Trim()))
+                {
+                    currentPosition++;
+                    continue;
+                }
+
+                if (("+".Equals(sumbol) || "-".Equals(sumbol)) && string.IsNullOrEmpty(lexema))
+                {
+                    currentPosition++;
+                    return new Token(sumbol);
+                }
+
+                if (Int32.TryParse(sumbol, out int x))
+                {
+                    lexema = lexema + sumbol;
+                }
+                else
+                {
+                    return new Token(lexema);
+                }
+
+                currentPosition++;
+            }
+
+            return new Token(lexema);
         }
     }
 }

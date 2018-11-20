@@ -32,5 +32,33 @@ namespace tests
             var calculator = new Calculator();
             Assert.Equal("4", calculator.Calculate("2+2"));
         }
+
+        [Fact]
+        public void Calculate_TenPlusTwoExpression_TwelveResult()
+        {
+            var calculator = new Calculator();
+            Assert.Equal("12", calculator.Calculate("10+2"));
+        }
+
+        [Fact]
+        public void Calculate_TenPlusTenExpression_TwentyResult()
+        {
+            var calculator = new Calculator();
+            Assert.Equal("20", calculator.Calculate("10+10"));
+        }
+
+        [Fact]
+        public void Calculate_TenPlusTenExpressionWithSpace_TwentyResult()
+        {
+            var calculator = new Calculator();
+            Assert.Equal("20", calculator.Calculate("10 +10"));
+        }
+
+        [Fact]
+        public void Calculate_TenMinusFiveExpressionWithSpace_FiveResult()
+        {
+            var calculator = new Calculator();
+            Assert.Equal("5", calculator.Calculate("10 - 5"));
+        }
     }
 }

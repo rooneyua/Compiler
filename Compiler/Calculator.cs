@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Compiler
 {
@@ -24,6 +22,12 @@ namespace Compiler
                 if ("+".Equals(operation.Value))
                 {
                     var result = x + y;
+                    return result.ToString();
+                }
+
+                if ("-".Equals(operation.Value))
+                {
+                    var result = x - y;
                     return result.ToString();
                 }
             }
