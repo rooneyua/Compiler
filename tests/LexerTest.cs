@@ -82,7 +82,7 @@ namespace tests
         }
 
         [Fact]
-        public void NextToken_MyltiplyExpression_TwoTokens()
+        public void NextToken_MultiplyExpression_TwoTokens()
         {
             Lexer tested = new Lexer("*");
             Assert.Equal("*", tested.NextToken().Value);

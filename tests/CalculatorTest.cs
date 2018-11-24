@@ -83,7 +83,7 @@ namespace tests
         }
 
         [Fact]
-        public void Calculate_FourMyltiplyByTwoMinusThreeExpression_FiveResult()
+        public void Calculate_FourMultiplyByTwoMinusThreeExpression_FiveResult()
         {
             var calculator = new Calculator();
             Assert.Equal("5", calculator.Calculate("4*2-3"));
@@ -94,6 +94,13 @@ namespace tests
         {
             var calculator = new Calculator();
             Assert.Equal("0", calculator.Calculate("6/2-3"));
+        }
+
+        [Fact]
+        public void Calculate_SixDivideByTwoMultipliedByThreeDividedByNineExpression_OneResult()
+        {
+            var calculator = new Calculator();
+            Assert.Equal("1", calculator.Calculate("6/2*3/9"));
         }
     }
 }
