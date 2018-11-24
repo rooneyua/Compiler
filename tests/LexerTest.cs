@@ -81,5 +81,21 @@ namespace tests
             Assert.Equal(Token.EOF, tested.NextToken().Value);
         }
 
+        [Fact]
+        public void NextToken_MyltiplyExpression_TwoTokens()
+        {
+            Lexer tested = new Lexer("*");
+            Assert.Equal("*", tested.NextToken().Value);
+            Assert.Equal(Token.EOF, tested.NextToken().Value);
+        }
+
+        [Fact]
+        public void NextToken_DivideExpression_TwoTokens()
+        {
+            Lexer tested = new Lexer("/");
+            Assert.Equal("/", tested.NextToken().Value);
+            Assert.Equal(Token.EOF, tested.NextToken().Value);
+        }
+
     }
 }

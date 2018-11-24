@@ -31,7 +31,8 @@ namespace Compiler
                     continue;
                 }
 
-                if (("+".Equals(sumbol) || "-".Equals(sumbol)) && string.IsNullOrEmpty(lexema))
+                if (("+".Equals(sumbol) || "-".Equals(sumbol) || "*".Equals(sumbol) || "/".Equals(sumbol)) 
+                    && string.IsNullOrEmpty(lexema))
                 {
                     currentPosition++;
                     return new Token(sumbol);

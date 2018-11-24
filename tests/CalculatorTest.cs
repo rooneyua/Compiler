@@ -60,5 +60,40 @@ namespace tests
             var calculator = new Calculator();
             Assert.Equal("5", calculator.Calculate("10 - 5"));
         }
+
+        [Fact]
+        public void Calculate_TwoMultipliedByTwoExpression_FourResult()
+        {
+            var calculator = new Calculator();
+            Assert.Equal("4", calculator.Calculate("2*2"));
+        }
+
+        [Fact]
+        public void Calculate_FourDividedByTwoExpression_TwoResult()
+        {
+            var calculator = new Calculator();
+            Assert.Equal("2", calculator.Calculate("4/2"));
+        }
+
+        [Fact]
+        public void Calculate_FourPlusTwoMinusThreeExpression_ThreeResult()
+        {
+            var calculator = new Calculator();
+            Assert.Equal("3", calculator.Calculate("4+2-3"));
+        }
+
+        [Fact]
+        public void Calculate_FourMyltiplyByTwoMinusThreeExpression_FiveResult()
+        {
+            var calculator = new Calculator();
+            Assert.Equal("5", calculator.Calculate("4*2-3"));
+        }
+
+        [Fact]
+        public void Calculate_SixDivideByTwoMinusThreeExpression_ZeroResult()
+        {
+            var calculator = new Calculator();
+            Assert.Equal("0", calculator.Calculate("6/2-3"));
+        }
     }
 }

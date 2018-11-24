@@ -12,27 +12,60 @@ namespace Compiler
             }
 
             var lexer = new Lexer(experssion);
+            var token = lexer.NextToken();
 
-            var right = lexer.NextToken();
-            var operation = lexer.NextToken();
-            var left = lexer.NextToken();
-
-            if (Int32.TryParse(right.Value, out int x) && Int32.TryParse(left.Value, out int y))
+            if (!int.TryParse(token.Value, out int left) || Token.EOF.Equals(token.Value))
             {
-                if ("+".Equals(operation.Value))
+                return "";
+            }
+
+            while (true)
+            {
+                var operation = lexer.NextToken();
+                if (Token.EOF.Equals(operation.Value))
                 {
-                    var result = x + y;
-                    return result.ToString();
+                    break;
                 }
 
-                if ("-".Equals(operation.Value))
+                var rightToken = lexer.NextToken();
+                if (Token.EOF.Equals(rightToken.Value))
                 {
-                    var result = x - y;
-                    return result.ToString();
+                    break;
+                }
+
+                if (int.TryParse(rightToken.Value, out int right))
+                {
+                    if ("+".Equals(operation.Value))
+                    {
+                        left = left + right;
+                    }
+                    else
+                    if ("-".Equals(operation.Value))
+                    {
+                        left = left - right;
+                    }
+                    else
+                    if ("*".Equals(operation.Value))
+                    {
+                        left = left * right;
+                    }
+                    else
+                    if ("/".Equals(operation.Value))
+                    {
+                        left = left / right;
+                    }
+                    else
+                    {
+                        return "";
+                    }
+                }
+                else
+                {
+                    return "";
                 }
             }
 
-            return "";
+            return left.ToString();
         }
     }
 }
