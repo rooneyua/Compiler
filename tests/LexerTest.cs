@@ -97,5 +97,20 @@ namespace tests
             Assert.Equal(Token.EOF, tested.NextToken().Value);
         }
 
+        [Fact]
+        public void NextToken_RightExpression_TwoTokens()
+        {
+            Lexer tested = new Lexer("(");
+            Assert.Equal("(", tested.NextToken().Value);
+            Assert.Equal(Token.EOF, tested.NextToken().Value);
+        }
+
+        [Fact]
+        public void NextToken_LeftExpression_TwoTokens()
+        {
+            Lexer tested = new Lexer(")");
+            Assert.Equal(")", tested.NextToken().Value);
+            Assert.Equal(Token.EOF, tested.NextToken().Value);
+        }
     }
 }

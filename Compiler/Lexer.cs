@@ -19,7 +19,7 @@ namespace Compiler
                 return new Token(Token.EOF);
             }
 
-            string lexema = "";
+            var lexema = "";
 
             while (expression.Length > currentPosition)
             {
@@ -31,7 +31,9 @@ namespace Compiler
                     continue;
                 }
 
-                if (("+".Equals(sumbol) || "-".Equals(sumbol) || "*".Equals(sumbol) || "/".Equals(sumbol)) 
+                if (("+".Equals(sumbol) || "-".Equals(sumbol) 
+                    || "*".Equals(sumbol) || "/".Equals(sumbol)
+                    || "(".Equals(sumbol) || ")".Equals(sumbol)) 
                     && string.IsNullOrEmpty(lexema))
                 {
                     currentPosition++;
