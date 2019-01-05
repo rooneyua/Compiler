@@ -6,7 +6,7 @@ namespace Compiler
     {
         public int Calculate(string experssion)
         {
-            return new Interpreter(experssion).Expr();
+            return new Interpreter().Interpret(experssion);
         }
     }
 }

@@ -6,75 +6,60 @@ namespace Compiler
 {
     class Interpreter
     {
-        private Lexer lexer;
-        private Token currentToken;
-
-        public Interpreter(string expression)
+        public int Interpret(string expresion)
         {
-            this.lexer = new Lexer(expression);
+            var parser = new Parser(expresion);
+            AbstractSyntaxTreeNode node = parser.Expr();
+            
+            return Evaluate(node);
         }
 
-        private int IntValue()
+        private int Visit(NumberNode node)
         {
-            var value = 0;
-            int.TryParse(currentToken.Value, out value);
-
-            return value;
+            return node.IntValue();
         }
 
-        private int Factor()
+        private int Visit(BinaryOperationNode node)
         {
-            currentToken = lexer.NextToken();
-            if ("(".Equals(currentToken.Value))
+            var left = Evaluate(node.Left);
+            var right = Evaluate(node.Right);
+
+            if ("+".Equals(node.Value))
             {
-                return Expr();
+                return left + right;
             }
-
-            return IntValue();
-        }
-
-        private int Term()
-        {
-            var result = Factor();
-
-            currentToken = lexer.NextToken();
-
-            while ("*".Equals(currentToken.Value) || "/".Equals(currentToken.Value))
+            else
+            if ("-".Equals(node.Value))
             {
-                if ("*".Equals(currentToken.Value))
-                {
-                    result = result * Factor();
-                }
-                else
-                if ("/".Equals(currentToken.Value))
-                {
-                    result = result / Factor();
-                }
-
-                currentToken = lexer.NextToken();
+                return left - right;
+            }
+            else
+            if ("*".Equals(node.Value))
+            {
+                return left * right;
+            }
+            else
+            if ("/".Equals(node.Value))
+            {
+                return left / right;
             }
 
-            return result;
+            return 0;
         }
 
-        public int Expr()
+        private int Evaluate(AbstractSyntaxTreeNode node)
         {
-            var result = Term();
-
-            while ("+".Equals(currentToken.Value) || "-".Equals(currentToken.Value))
-            { 
-                if ("+".Equals(currentToken.Value))
-                {
-                    result = result + Term();
-                }
-                else
-                if ("-".Equals(currentToken.Value))
-                {
-                    result = result - Term();
-                }
+            if (node.GetType() == typeof(NumberNode))
+            {
+                return Visit((NumberNode)node);
+            }
+            else
+            if (node.GetType() == typeof(BinaryOperationNode))
+            {
+                return Visit((BinaryOperationNode)node);
             }
 
-            return result;
+            return 0;
         }
     }
 }
