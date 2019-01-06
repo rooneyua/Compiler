@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Compiler
 {
-    class AbstractSyntaxTreeNode
+    abstract class AbstractSyntaxTreeNode
     {
         protected Token token;
 
@@ -14,5 +14,7 @@ namespace Compiler
         }
 
         public string Value => token.Value;
+
+        abstract public int Accept(INodeVisitor visitor);
     }
 }

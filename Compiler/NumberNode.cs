@@ -16,5 +16,10 @@ namespace Compiler
 
             return value;
         }
+
+        public override int Accept(INodeVisitor visitor)
+        {
+            return visitor.Visit(this);
+        }
     }
 }

@@ -17,5 +17,10 @@ namespace Compiler
 
         public AbstractSyntaxTreeNode Left => left;
         public AbstractSyntaxTreeNode Right => right;
+
+        public override int Accept(INodeVisitor visitor)
+        {
+            return visitor.Visit(this);
+        }
     }
 }
